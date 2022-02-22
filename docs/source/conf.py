@@ -2,9 +2,9 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'Гайд по разработке Bulker'
+copyright = '2022, Belstowe'
+author = 'Belstowe'
 
 release = '0.1'
 version = '0.1.0'

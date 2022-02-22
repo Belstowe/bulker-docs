@@ -1,22 +1,13 @@
-Welcome to Lumache's documentation!
-===================================
+Гайд по разработке Bulker
+=========================
 
-**Lumache** (/lu'make/) is a Python library for cooks and food lovers
-that creates recipes mixing random ingredients.
-It pulls data from the `Open Food Facts database <https://world.openfoodfacts.org/>`_
-and offers a *simple* and *intuitive* API.
+**Bulker** – веб-адаптация популярной настольной игры.
 
-Check out the :doc:`usage` section for further information, including
-how to :ref:`installation` the project.
+Данная документация должна ввести членов разработки в курс, подобный практике по университетскому предмету.
 
-.. note::
-
-   This project is under active development.
-
-Contents
---------
+Содержание
+----------
 
 .. toctree::
 
-   usage
-   api
+   overview
