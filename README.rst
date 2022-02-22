@@ -1,7 +1,7 @@
 Гайд по разработке Bulker
 =========================
 
-.. image:: img/bulker_300.png
+.. image:: docs/source/img/bulker_300.png
 
 **Bulker** – веб-адаптация популярной настольной игры.
 
