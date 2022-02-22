@@ -1,9 +1,8 @@
-Template for the Read the Docs tutorial
-=======================================
+Гайд по разработке Bulker
+=========================
 
-This GitHub template includes fictional Python library
-with some basic Sphinx docs.
+.. image:: img/bulker_300.png
 
-Read the tutorial here:
+**Bulker** – веб-адаптация популярной настольной игры.
 
-https://docs.readthedocs.io/en/stable/tutorial/
+Данная документация должна ввести членов разработки в курс, подобный практике по университетскому предмету.

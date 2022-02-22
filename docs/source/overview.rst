@@ -6,6 +6,7 @@
 
 Проект Bulker было решено делать на Web-фреймворке **Blazor**: свежей платформе, позволяющей использовать исключительно C# при написании скриптов для веб-страниц (вместо JavaScript).
 Причиной такого решения послужили:
+
 * Знание C# backend-разработчиком;
 * Околонулевой опыт в вёрстке и незнание JavaScript frontend-разработчиком.
 
@@ -16,10 +17,11 @@
 ---------
 
 В качестве инструментов для проекта используются:
+
 * `.NET 5.0 SDK <https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-5.0.405-windows-x64-installer/>`_
-Одно из этого:
-* `Visual Studio Code <https://visualstudio.microsoft.com/ru/downloads/>`_
-* `Visual Studio Community <https://visualstudio.microsoft.com/ru/downloads/>`_
+* Одно из этого:
+    * `Visual Studio Code <https://visualstudio.microsoft.com/ru/downloads/>`_
+    * `Visual Studio Community <https://visualstudio.microsoft.com/ru/downloads/>`_
 
 Структура
 ---------

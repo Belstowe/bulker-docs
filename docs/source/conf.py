@@ -33,3 +33,11 @@ html_theme = 'sphinx_rtd_theme'
 
 # -- Options for EPUB output
 epub_show_urls = 'footnote'
+
+latex_elements = {
+    'preamble': '\\usepackage[utf8]{inputenc}',
+    'babel': '\\usepackage[russian]{babel}',
+    'cmappkg': '\\usepackage{cmap}',
+    'fontenc': '\usepackage[T1,T2A]{fontenc}',
+    'utf8extra':'\\DeclareUnicodeCharacter{00A0}{\\nobreakspace}',
+}
