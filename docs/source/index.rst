@@ -13,6 +13,7 @@
 .. toctree::
 
    overview
+   git
 
 .. toctree::
    :caption: Backend-разработка
