@@ -68,5 +68,6 @@
 Материалы для ознакомления
 --------------------------
 
+* `Microsoft Docs (Русский): Введение в ASP.NET Core Blazor <https://docs.microsoft.com/ru-ru/aspnet/core/blazor/?view=aspnetcore-5.0>`_
 * `Microsoft Docs: Build web applications with Blazor <https://docs.microsoft.com/en-us/learn/paths/build-web-apps-with-blazor/>`_
-* `YouTube: Blazor for Beginners <https://www.youtube.com/playlist?list=PLdo4fOcmZ0oUJCA3DCzKT79Oe3kdKEceX/>`_
+* `YouTube: Blazor for Beginners <https://www.youtube.com/playlist?list=PLdo4fOcmZ0oUJCA3DCzKT79Oe3kdKEceX>`_

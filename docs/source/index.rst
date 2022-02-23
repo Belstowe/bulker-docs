@@ -14,16 +14,10 @@
 
    overview
 
-Backend-разработка
-~~~~~~~~~~~~~~~~~~
-
 .. toctree::
    :caption: Backend-разработка
 
    backend/01_crud
-
-Frontend-разработка
-~~~~~~~~~~~~~~~~~~~
 
 .. toctree::
    :caption: Frontend-разработка
