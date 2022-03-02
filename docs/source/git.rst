@@ -3,7 +3,7 @@
 
 .. figure:: img/github.png
     :width: 64 px
-    :align: left
+    :align: right
 
     `Ссылка на GitHub-репозиторий проекта <https://github.com/mmm-development/bulker>`_.
 

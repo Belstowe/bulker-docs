@@ -11,16 +11,21 @@
 ----------
 
 .. toctree::
+   :titlesonly:
 
    overview
    git
 
 .. toctree::
    :caption: Backend-разработка
+   :titlesonly:
+   :glob:
 
-   backend/01_crud
+   backend/*
 
 .. toctree::
    :caption: Frontend-разработка
+   :titlesonly:
+   :glob:
 
-   frontend/01_init
+   frontend/*

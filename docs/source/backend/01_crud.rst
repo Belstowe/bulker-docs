@@ -16,7 +16,9 @@
 Игроки
 ------
 
-В начале игрок имеет следующие поля::
+В начале игрок имеет следующие поля:
+
+.. code-block:: yaml
 
     id:
         type: string
@@ -26,8 +28,13 @@
         type: string
         format: date-time
         readOnly: true
+    color:
+        type: integer
+        format: int32
+        readOnly: true
     name:
         type: string
+        required: true
     isAlive:
         type: boolean
     age:
@@ -50,6 +57,26 @@ CRUD-операции включают в себя операции **созда
 Удалить игрока можно, используя его ``id``.
 
 Игрока можно обновить, указывая его ``id`` и затем обновляемые поля.
+
+Интерфейс
+---------
+
+Ниже указан пример предлагаемого интерфейса для CRUD-операций:
+
+.. code-block:: csharp
+
+    public interface IPlayerService
+    {
+        Guid CreatePlayer(string);
+        Player GetPlayer(Guid);
+        IEnumerable<Player> GetPlayers();
+        void UpdatePlayer(Player);
+        void DeletePlayer(Guid);
+    }
+
+Сериализовывать структуру Player, например, в словарь или JSON нет необходимости – монолитная архитектура приложения предполагает использование реализованной структуры.
+
+Единственное замечание: в ``UpdatePlayer()`` даётся *целая* структура ``Player``. Метод извлекает ``id`` из структуры, находит запись по ``id`` в бд и полностью перезаписывает эту запись входной структурой, *исключая поля только для чтения*.
 
 Задание
 -------
