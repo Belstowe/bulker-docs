@@ -18,32 +18,20 @@
 
 В начале игрок имеет следующие поля:
 
-.. code-block:: yaml
+.. code-block:: csharp
 
-    id:
-        type: string
-        format: uuid
-        readOnly: true
-    dateCreated:
-        type: string
-        format: date-time
-        readOnly: true
-    color:
-        type: integer
-        format: int32
-        readOnly: true
-    name:
-        type: string
-        required: true
-    isAlive:
-        type: boolean
-    age:
-        type: integer
-    gender:
-        type: string
-        enum: [male, female]
-    isFertile:
-        type: boolean
+    enum Gender { Male, Female };
+
+    public record Player {
+        Guid id { get; init; };
+        DateTimeOffset dateCreated { get; init; };
+        Color color { get; init; };
+        String name { get; set; };
+        bool isAlive { get; set; };
+        int age { get; set; };
+        Gender gender { get; set; };
+        bool isFertile { get; set; };
+    }
 
 CRUD
 ----

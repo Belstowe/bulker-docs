@@ -6,8 +6,8 @@ project = 'Гайд по разработке Bulker'
 copyright = '2022, Belstowe'
 author = 'Belstowe'
 
-release = '0.2'
-version = '0.2.0'
+release = '0.3'
+version = '0.3.0'
 
 # -- General configuration
 
@@ -17,6 +17,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
+    'sphinx_panels',
 ]
 
 intersphinx_mapping = {
