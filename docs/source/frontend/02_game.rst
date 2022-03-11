@@ -21,17 +21,16 @@
 
 Несмотря на предыдущее заявление, что вряд ли лучше таблицы я что-нибудь придумаю, всё же что-нибудь более-менее приятное на глаз придумать хотелось *(ибо таблица, честно, смотрится не очень)*.
 
-Так что вместо *"каждому по столбцу в таблице"* предлагаю сделать *"каждому по контейнеру"*.
+Мне совсем не нравилось, что виды характеристик находились в крайнем столбце, отчего приходилось метаться взглядом, чтобы найти подходящие столбец и строку. Да и вид был не очень, и вряд ли бы можно было это изменить.
+
+Так что мною предлагаются 2 других подхода к дизайну:
+
+"Каждому по контейнеру"
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Такой подход даёт большой простор для фантазий, а соответственно для будущего дизайна; позволяет сам дизайн сделать более привлекательным; переделать затем контейнеры в таблицу легче, чем таблицу в набор контейнеров.
 
 В качестве прототипа можно использовать следующий дизайн:
-
-.. figure:: img/02_player_box_dead.png
-    :width: 240 px
-    :align: right
-
-    Вид мёртвого игрока
 
 .. figure:: img/02_player_box.png
     :width: 240 px
@@ -41,9 +40,13 @@
 
 .. figure:: img/02_player_box_crossed.png
     :width: 240 px
-    :align: center
 
     Вид с нераскрытыми хар-ками
+
+.. figure:: img/02_player_box_dead.png
+    :width: 240 px
+
+    Вид мёртвого игрока
 
 .. note::
     Используемый здесь шрифт: **Bahnschrift**.
@@ -52,19 +55,35 @@
 
 Так что можете либо *сократить высоту*, вместив `заголовок/значение` в один ряд или как-то объединив шапку с именем, либо *сократить ширину*, используя везде сжатые шрифты и одинаковое выравнивание.
 
-Активный игрок (чей ход сейчас идёт) помечается светлой обводкой.
+"Таблица без бокового столбца"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-При наведении на поле характеристики строка выделяется: например, шрифт становится жирнее либо меняет цвет. При скрытой характеристики штриховка становится светлей.
+Спасибо Петраркиусу за идею. Эта стратегия мне стала нравиться куда больше, когда я ради интереса её реализовал.
 
-На убитых/выгнанных игроках использован чёрно-белый фильтр, их фон темней, а возле их имени стоит крест. Можете использовать какие-то другие способы помечать, что игрок мёртв.
+Мы строим таблицу, подобно первому клиенту Булкера *(в данном случае только я заменил стандартную HTML-таблицу на CSS Grid)*, но названия характеристик не располагаются в отдельном боковом столбце: они находятся над рядом со значениями, растягиваясь на всю таблицу.
 
-Дополнительные характеристики (всё, кроме биологической) определяются при инициализации сервером и передаются им через интерфейс ``Dictionary<string, string> IPlayerService.GetTraits()``. Здесь ключ - кодовое название, которое может передаваться как id черты, а значение - выводимое название.
+.. figure:: img/02_table_big.png
+    
+    Вид при большом разрешении
+
+.. figure:: img/02_table_short.png
+
+    Вид при пропорциях смартфона (каковы перспективы-то!)
+
+Выходит достаточно красиво и современно; таблицей удобней пользоваться; занимает меньше места по сравнению с прошлым вариантом (и даже меньше, чем в прошлой реализации Булкера!) и масштабируется даже лучше.
+
+Даже вопрос с переносимостью благодаря CSS Grid решается легко. Можно просто увеличить `gap` между контейнерами!
+
+Ещё и код прототипа вам в помощь. Его можно найти в конце статьи.
+
+Интерфейс бэк-энда
+~~~~~~~~~~~~~~~~~~
+
+Характеристики определяются при инициализации сервером и передаются им через интерфейс ``Dictionary<string, string> IPlayerService.GetTraits()``. Здесь ключ - кодовое название, которое может передаваться как id черты, а значение - выводимое название.
 
 Кроме того, в интерфейсе ``IEnumerable<Player> IPlayerService.GetPlayers()`` сервер передаёт в модели игрока следующие характеристики:
 
 .. code-block:: csharp
-
-    enum Gender { Male, Female };
 
     record Player {
         Guid id;
@@ -72,9 +91,6 @@
         Color color;
         String name;
         bool isAlive;
-        int age;
-        Gender gender;
-        bool isFertile;
     }
 
 .. note::
@@ -82,7 +98,7 @@
 
     * У игроков есть цветные шапки. У каждого игрока свой уникальный цвет, который генерируется сервером. Такой дизайн необходим для этапа голосования.
     * Характеристики с подробным описанием помечены пунктиром (описание выводится при наведении мышкой). Если у характеристики нет описания, в ``Tooltip`` передаётся пустая строка. 
-    * Возраст (кстати, обозначенный Unicode-символом) и пол игрока объединены, и раскрываются вместе (а в описании выводится фертильность).
+    * Возраст (кстати, обозначенный Unicode-символом) и пол игрока объединены в единую характеристику `"bio"`, и раскрываются вместе (а в описании выводится фертильность).
 
 События
 -------
@@ -124,3 +140,233 @@ TBD
 #. Обеспечить нормальную работу с дополнительными характеристиками. *Требуется взаимодействие с backend.*
 #. Написать события раскрытия, обмена и рандомизации черты. *Требуется взаимодействие с backend.*
 #. Написать модуль таймера.
+
+Статический макет
+-----------------
+
+.. code-block:: html
+    :linenos:
+
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Тест таблицы</title>
+            <style>
+                html, input {
+                    font-family: 'Bahnschrift', 'Trebuchet MS';
+                    font-size: 1.2em;
+                }
+
+                body {
+                    background: repeating-linear-gradient(-45deg, rgb(220, 220, 220, 1), rgb(220, 220, 220, 1) 1%, rgb(200, 200, 200, 1) 1%, rgb(200, 200, 200, 1) 2%) no-repeat;
+                    min-height: 100vh;
+                }
+
+                .inner-body {
+                    width: 90%;
+                    min-height: 90%;
+                    background-color: white;
+
+                    position: absolute;
+                    top: 5%;
+                    left: 5%;
+
+                    margin: auto;
+                    padding: 1vh 1vw;
+
+                    display: flex;
+                    align-items: center;
+                    align-content: center;
+                    justify-content: flex-start;
+                    flex-direction: column;
+
+                    box-shadow: 0.5vh 0.5vh 1vh 1vh darkgray;
+                }
+
+                .player-grid {
+                    display: grid;
+                    width: minmax(30%, auto);
+                    border: 2px solid black;
+                    border-radius: 5px;
+                    grid-template-columns: repeat(3, 1fr);
+                    grid-auto-rows: auto;
+                    box-shadow: 0.25vh 0.25vh 0.5vh darkgray;
+                }
+
+                .player-grid > div {
+                    position: relative;
+                    text-align: center;
+                    display: flex;
+                    align-items: center;
+                    align-content: center;
+                    justify-content: center;
+                }
+
+                .header-box {
+                    padding: 0;
+                    height: 12px;
+                }
+
+                .footer-box {
+                    padding: 0;
+                    height: 6px;
+                }
+
+                .title-box {
+                    background-color: darkgray;
+                    color: white;
+                    font-weight: bold;
+                    font-size: 90%;
+                    grid-column-start: 1;
+                    grid-column-end: 4;
+                    padding: 2px;
+                }
+
+                .value-box {
+                    border-left: 1px solid darkgray;
+                    border-right: 1px solid darkgray;
+                    background-color: lightgrey;
+                    color: black;
+                    padding: 6px;
+                    min-height: 1.5em;
+                    min-width: min(10vw, 12em);
+                }
+
+                .covered-child,
+                .covered-before,
+                .covered-after {
+                    position: relative;
+                }
+
+                .covered,
+                .covered-child > *,
+                .covered-before::before,
+                .covered-after::after {
+                    position: absolute;
+                    content: '';
+                    display: block;
+                    inset: 0;
+                    background: repeating-linear-gradient(45deg, rgb(220, 220, 220, 1), rgb(220, 220, 220, 1) 10%, rgb(200, 200, 200, 1) 10%, rgb(200, 200, 200, 1) 20%);
+                }
+
+                .dead {
+                    filter: invert(100%);
+                    -webkit-filter: invert(100%);
+                }
+
+                .player-name-box {
+                    border-left: 1px dashed darkgray;
+                    border-right: 1px dashed darkgray;
+                    background-color: white;
+                    color: black;
+                    padding: 12px;
+                    font-size: 150%;
+                }
+
+                .color-header {
+                    width: 100%;
+                    height: 12px;
+                }
+            </style>
+        </head>
+
+        <body>
+            <div class="inner-body">
+                <div class="player-grid">
+
+                    <div class="header-box" style="background-color: orange;"></div>
+                    <div class="header-box" style="background-color: green;"></div>
+                    <div class="header-box" style="background-color: blue;"></div>
+
+                    <div class="player-name-box">Montferrat</div>
+                    <div class="player-name-box">Mao</div>
+                    <div class="player-name-box dead">Magnus ☦</div>
+
+                    <div class="title-box">
+                        Биологическая характеристика
+                    </div>
+                    <div class="value-box">
+                        <span style="border-bottom: 2px dashed #000;">♂️ 25 лет</span>
+                    </div>
+                    <div class="value-box covered">
+                    </div>
+                    <div class="value-box covered dead">
+                    </div>
+
+                    <div class="title-box">
+                        Профессия
+                    </div>
+                    <div class="value-box">
+                        Эндокринолог
+                    </div>
+                    <div class="value-box">
+                        Терапевт
+                    </div>
+                    <div class="value-box dead">
+                        Программист
+                    </div>
+
+                    <div class="title-box">
+                        Фобия
+                    </div>
+                    <div class="value-box">
+                        <span style="border-bottom: 2px dashed #000;">Гелиофобия</span>
+                    </div>
+                    <div class="value-box">
+                        Нет фобии
+                    </div>
+                    <div class="value-box covered dead">
+                    </div>
+
+                    <div class="title-box">
+                        Хобби
+                    </div>
+                    <div class="value-box covered">
+                    </div>
+                    <div class="value-box covered">
+                    </div>
+                    <div class="value-box dead">
+                        Лыжи
+                    </div>
+
+                    <div class="title-box">
+                        Состояние здоровья
+                    </div>
+                    <div class="value-box covered">
+                    </div>
+                    <div class="value-box covered">
+                    </div>
+                    <div class="value-box covered dead">
+                    </div>
+
+                    <div class="title-box">
+                        Дополнительная информация
+                    </div>
+                    <div class="value-box covered">
+                    </div>
+                    <div class="value-box">
+                        Мазохист
+                    </div>
+                    <div class="value-box covered dead">
+                    </div>
+
+                    <div class="title-box">
+                        Багаж
+                    </div>
+                    <div class="value-box">
+                        Костюм для БДСМ
+                    </div>
+                    <div class="value-box covered">
+                    </div>
+                    <div class="value-box dead">
+                        Шпага
+                    </div>
+
+                    <div class="footer-box" style="background-color: orange;"></div>
+                    <div class="footer-box" style="background-color: green;"></div>
+                    <div class="footer-box" style="background-color: blue;"></div>
+                </div>
+            </div>
+        </body>
+    </html>

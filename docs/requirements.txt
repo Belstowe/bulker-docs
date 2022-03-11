@@ -1,2 +1,2 @@
 karma-sphinx-theme==0.0.8
-sphinx-panels==0.6.0
+sphinx-csharp==0.1.8
