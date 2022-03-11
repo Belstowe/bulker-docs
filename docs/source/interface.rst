@@ -1,13 +1,17 @@
 Интерфейс
 =========
 
+Здесь описан интерфейс обращения фронт-энда к бэк-энду.
+
+``Задача ##``: доступность соответствующего метода при завершении бэк-эндом этой задачи.
+
 .. default-domain:: csharp
 
 .. namespace:: bulker.Player
 
 .. class:: Player
 
-    *(1)* Запись игрока.
+    *(Задание 1)* Запись игрока.
 
     .. property:: Guid id { get; }
 
@@ -24,40 +28,40 @@
 
     Сервис для взаимодействия с записями игроков.
 
-    .. method:: *(1)* Guid CreatePlayer(string Name)
+    .. method:: Guid CreatePlayer(string Name)
 
-        Генерирует запись для игрока с именем ``Name``. Возвращает его ID.
+        *(Задание 1)* Генерирует запись для игрока с именем ``Name``. Возвращает его ID.
 
-    .. method:: *(1)* Player GetPlayer(Guid ID)
+    .. method:: Player GetPlayer(Guid ID)
 
-        Получает общую информацию по игроку (т.е. исключая его игровые характеристики).
+        *(Задание 1)* Получает общую информацию по игроку (т.е. исключая его игровые характеристики).
 
-    .. method:: *(1)* IEnumerable<Player> GetPlayers()
+    .. method:: IEnumerable<Player> GetPlayers()
 
-        Получает общую информацию по всем игрокам.
+        *(Задание 1)* Получает общую информацию по всем игрокам.
 
-    .. method:: *(1)* void UpdatePlayer(Player player)
+    .. method:: void UpdatePlayer(Player player)
 
-        Заменяет в БД/словаре запись с соответствующим ID объектом ``player``.
+        *(Задание 1)* Заменяет в БД/словаре запись с соответствующим ID объектом ``player``.
 
-    .. method:: *(1)* void DeletePlayer(Guid ID)
+    .. method:: void DeletePlayer(Guid ID)
 
-        Удаляет в БД/словаре запись с соответствующим ID.
+        *(Задание 1)* Удаляет в БД/словаре запись с соответствующим ID.
 
-    .. method:: *(2)* Dictionary<string, string> GetTraits()
+    .. method:: Dictionary<string,string> GetTraits()
 
-        Получает все возможные характеристики игрока. Ключом здесь выступает кодовое название (далее ``TraitKey``), значением - внешнее название.
+        *(Задание 2)* Получает все возможные характеристики игрока. Ключом здесь выступает кодовое название (далее ``TraitKey``), значением - внешнее название.
 
-    .. method:: *(2)* (string Value, string Tooltip) GetPlayerTrait(Guid ID, string TraitKey)
+    .. method:: (string,string) GetPlayerTrait(Guid ID, string TraitKey)
 
-        Получает значение соответствующей черты ``TraitKey`` у игрока ``ID``.
+        *(Задание 2)* Получает значение соответствующей черты ``TraitKey`` у игрока ``ID``.
 
-    .. method:: *(2)* void SwapPlayerTrait(Guid subject, Guid object, string TraitKey)
+    .. method:: void SwapPlayerTrait(Guid subject, Guid object, string TraitKey)
 
-        Меняет местами черту ``TraitKey`` у игроков ``subject`` и ``object``.
-        *Не забудьте обновить черту, если она раскрыта, через :meth:`GetPlayerTrait`!*
+        *(Задание 2)* Меняет местами черту ``TraitKey`` у игроков ``subject`` и ``object``.
+        *Не забудьте обновить черту, если она раскрыта, через* ``GetPlayerTrait``!
 
-    .. method:: *(2)* void RandomizePlayerTrait(Guid player, string TraitKey)
+    .. method:: void RandomizePlayerTrait(Guid player, string TraitKey)
 
-        Генерирует новое значение для черты ``TraitKey`` для игрока ``player``.
-        *Не забудьте обновить черту, если она раскрыта, через :meth:`GetPlayerTrait`!*
+        *(Задание 2)* Генерирует новое значение для черты ``TraitKey`` для игрока ``player``.
+        *Не забудьте обновить черту, если она раскрыта, через* ``GetPlayerTrait``!

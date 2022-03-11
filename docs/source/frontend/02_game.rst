@@ -32,6 +32,12 @@
 
 В качестве прототипа можно использовать следующий дизайн:
 
+.. figure:: img/02_player_box_dead.png
+    :width: 240 px
+    :align: right
+
+    Вид мёртвого игрока
+
 .. figure:: img/02_player_box.png
     :width: 240 px
     :align: left
@@ -42,11 +48,6 @@
     :width: 240 px
 
     Вид с нераскрытыми хар-ками
-
-.. figure:: img/02_player_box_dead.png
-    :width: 240 px
-
-    Вид мёртвого игрока
 
 .. note::
     Используемый здесь шрифт: **Bahnschrift**.
