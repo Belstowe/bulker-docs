@@ -56,8 +56,8 @@
 
 Так что можете либо *сократить высоту*, вместив `заголовок/значение` в один ряд или как-то объединив шапку с именем, либо *сократить ширину*, используя везде сжатые шрифты и одинаковое выравнивание.
 
-"Таблица без бокового столбца"
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"Таблица с заголовками на отдельной строке"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Спасибо Петраркиусу за идею. Эта стратегия мне стала нравиться куда больше, когда я ради интереса её реализовал.
 
@@ -76,6 +76,15 @@
 Даже вопрос с переносимостью благодаря CSS Grid решается легко. Можно просто увеличить `gap` между контейнерами!
 
 Ещё и код прототипа вам в помощь. Его можно найти в конце статьи.
+
+"Таблица без заголовков"
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Ещё одна идея Петраркиуса. Названия характеристик располагаются поверх нераскрытых ячеек.
+
+.. figure:: img/02_table_no_headers.png
+
+Код прототипа тоже будет расположен ниже.
 
 Интерфейс бэк-энда
 ~~~~~~~~~~~~~~~~~~
@@ -144,6 +153,9 @@ TBD
 
 Статический макет
 -----------------
+
+"Таблица с заголовками на отдельной строке"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: html
 
@@ -370,3 +382,227 @@ TBD
             </div>
         </body>
     </html>
+
+"Таблица без заголовков"
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: html
+
+    <!DOCTYPE html>
+        <html>
+            <head>
+                <meta charset="UTF-8">
+                <title>Тест таблицы</title>
+                <style>
+                    html, input {
+                        font-family: 'Bahnschrift', 'Trebuchet MS';
+                        font-size: 1.25em;
+                    }
+        
+                    body {
+                        background: repeating-linear-gradient(-45deg, rgb(220, 220, 220, 1), rgb(220, 220, 220, 1) 1%, rgb(200, 200, 200, 1) 1%, rgb(200, 200, 200, 1) 2%) no-repeat;
+                        min-height: 100vh;
+                    }
+        
+                    .inner-body {
+                        width: 90%;
+                        min-height: 90%;
+                        background-color: white;
+        
+                        position: absolute;
+                        top: 5%;
+                        left: 5%;
+        
+                        margin: auto;
+                        padding: 1vh 1vw;
+        
+                        display: flex;
+                        align-items: center;
+                        align-content: center;
+                        justify-content: flex-start;
+                        flex-direction: column;
+        
+                        box-shadow: 0.5vh 0.5vh 1vh 1vh darkgray;
+                    }
+        
+                    .player-grid {
+                        display: grid;
+                        width: fit-content;
+                        border: 2px solid black;
+                        border-radius: 5px;
+                        grid-template-columns: repeat(4, 1fr);
+                        grid-auto-rows: auto;
+                        box-shadow: 0.25vh 0.25vh 0.5vh darkgray;
+                    }
+        
+                    .player-grid > div {
+                        position: relative;
+                        text-align: center;
+                        display: flex;
+                        align-items: center;
+                        align-content: center;
+                        justify-content: center;
+                    }
+        
+                    .header-box {
+                        padding: 0;
+                        height: 12px;
+                    }
+        
+                    .footer-box {
+                        padding: 0;
+                        height: 6px;
+                    }
+        
+                    .value-box {
+                        border: 2px 1px solid rgb(190, 190, 190);
+                        background-color: whitesmoke;
+                        color: black;
+                        padding: 6px;
+                        min-height: 1.5em;
+                        min-width: min(10vw, 12em);
+                    }
+        
+                    .covered {
+                        background: repeating-linear-gradient(45deg, rgb(220, 220, 220), rgb(220, 220, 220) 10%, rgb(200, 200, 200) 10%, rgb(200, 200, 200) 20%);
+                        font-style: italic;
+                        font-weight: bold;
+                        font-stretch: semi-condensed;
+                        font-size: 75%;
+                        color: rgb(160, 160, 160);
+                    }
+
+                    .dead {
+                        filter: invert(90%);
+                        -webkit-filter: invert(90%);
+                    }
+
+                    .player-name-box {
+                        background-color: white;
+                        color: black;
+                        padding: 10px;
+                        font-size: 130%;
+                        font-weight: bold;
+                        font-stretch: semi-condensed;
+                    }
+
+                    .color-header {
+                        width: 100%;
+                        height: 12px;
+                    }
+                </style>
+            </head>
+
+            <body>
+                <div class="inner-body">
+                    <div class="player-grid">
+
+                        <div class="header-box" style="background-color: hsl(0, 100%, 50%);"></div>
+                        <div class="header-box" style="background-color: hsl(180, 100%, 50%);"></div>
+                        <div class="header-box" style="background-color: hsl(90, 100%, 50%);"></div>
+                        <div class="header-box" style="background-color: hsl(270, 100%, 50%);"></div>
+
+                        <div class="player-name-box" style="background-color: hsl(0, 100%, 95%);">Montferrat</div>
+                        <div class="player-name-box" style="background-color: hsl(180, 100%, 95%);">Mao</div>
+                        <div class="player-name-box dead" style="background-color: hsl(90, 100%, 95%);">Magnus ☦</div>
+                        <div class="player-name-box" style="background-color: hsl(270, 100%, 95%);">Ewenmait</div>
+
+                        <div class="value-box">
+                            <span style="border-bottom: 2px dashed #000;">♂️ 25 лет</span>
+                        </div>
+                        <div class="value-box covered">
+                            Биологическая характеристика
+                        </div>
+                        <div class="value-box covered dead">
+                            Биологическая характеристика
+                        </div>
+                        <div class="value-box">
+                            <span style="border-bottom: 2px dashed #000;">♀️ 34 года</span>
+                        </div>
+
+                        <div class="value-box">
+                            Эндокринолог
+                        </div>
+                        <div class="value-box">
+                            Терапевт
+                        </div>
+                        <div class="value-box dead">
+                            Программист
+                        </div>
+                        <div class="value-box covered">
+                            Профессия
+                        </div>
+
+                        <div class="value-box">
+                            <span style="border-bottom: 2px dashed #000;">Гелиофобия</span>
+                        </div>
+                        <div class="value-box">
+                            Нет фобии
+                        </div>
+                        <div class="value-box covered dead">
+                            Фобия
+                        </div>
+                        <div class="value-box">
+                            <span style="border-bottom: 2px dashed #000;">Арахнофобия</span>
+                        </div>
+
+                        <div class="value-box covered">
+                            Хобби
+                        </div>
+                        <div class="value-box covered">
+                            Хобби
+                        </div>
+                        <div class="value-box dead">
+                            Лыжи
+                        </div>
+                        <div class="value-box">
+                            Фотография
+                        </div>
+
+                        <div class="value-box covered">
+                            Состояние здоровья
+                        </div>
+                        <div class="value-box covered">
+                            Состояние здоровья
+                        </div>
+                        <div class="value-box covered dead">
+                            Состояние здоровья
+                        </div>
+                        <div class="value-box covered">
+                            Состояние здоровья
+                        </div>
+
+                        <div class="value-box covered">
+                            Дополнительная информация
+                        </div>
+                        <div class="value-box">
+                            Мазохист
+                        </div>
+                        <div class="value-box covered dead">
+                            Дополнительная информация
+                        </div>
+                        <div class="value-box covered">
+                            Дополнительная информация
+                        </div>
+
+                        <div class="value-box">
+                            Костюм для БДСМ
+                        </div>
+                        <div class="value-box covered">
+                            Багаж
+                        </div>
+                        <div class="value-box dead">
+                            Шпага
+                        </div>
+                        <div class="value-box covered">
+                            Багаж
+                        </div>
+
+                        <div class="footer-box" style="background-color: hsl(0, 100%, 50%);"></div>
+                        <div class="footer-box" style="background-color: hsl(180, 100%, 50%);"></div>
+                        <div class="footer-box" style="background-color: hsl(90, 100%, 50%);"></div>
+                        <div class="footer-box" style="background-color: hsl(270, 100%, 50%);"></div>
+                    </div>
+                </div>
+            </body>
+        </html>
