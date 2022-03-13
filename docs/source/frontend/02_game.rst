@@ -146,7 +146,6 @@ TBD
 -----------------
 
 .. code-block:: html
-    :linenos:
 
     <!DOCTYPE html>
     <html>
