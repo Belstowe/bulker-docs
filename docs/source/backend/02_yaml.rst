@@ -139,14 +139,14 @@
     class TraitValueOnly : ITrait
     {
         public string Name { get; set; }
-        public List<string> Traits { get; set; }
+        public ExtractList<string> Traits { get; set; }
         public (string Value, string Tooltip) Extract();
     }
 
     class TraitValueTooltip : ITrait
     {
         public string Name { get; set; }
-        public List<(string Value, string Tooltip)> Traits { get; set; }
+        public ExtractList<(string Value, string Tooltip)> Traits { get; set; }
         public (string Value, string Tooltip) Extract();
     }
 

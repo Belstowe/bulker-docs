@@ -95,10 +95,10 @@
 
 .. code-block:: csharp
 
-    record Player {
+    class Player {
         Guid id;
         DateTimeOffset dateCreated;
-        Color color;
+        string color;  // format: '#FFFFFF'
         String name;
         bool isAlive;
     }

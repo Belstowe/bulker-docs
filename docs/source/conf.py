@@ -7,7 +7,7 @@ copyright = '2022, Belstowe'
 author = 'Belstowe'
 
 release = '0.4'
-version = '0.4.0'
+version = '0.4.1'
 
 # -- General configuration
 
